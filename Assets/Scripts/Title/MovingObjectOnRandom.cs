@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomCircleAction : MonoBehaviour
+public class MovingObjectOnRandom : MonoBehaviour
 {
     private Vector3 tra_pos {get; set;}
     private Vector3 pre_tra_pos {get; set;}
@@ -12,17 +12,12 @@ public class RandomCircleAction : MonoBehaviour
     // オブジェクト移動の終点
     private Vector2 endPos {get;set;}
     private float startTime, distance;
-    public static RandomCircleAction instance;
+    private int _movingTime{get;set;}
 
-    public void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-    }
     void Start()
     {
+        TouchObjectManager touchObjectManager = GetComponent<TouchObjectManager>();
+        _movingTime = touchObjectManager._movingTime;
         // 計算式
         // 画面横幅/画面縦幅:画面比率
         // *10:シーンのUI画面のグリッド数
@@ -59,7 +54,7 @@ public class RandomCircleAction : MonoBehaviour
 
     IEnumerator MoveTouchObject()
     {
-        var actionFlame = 30;
+        var actionFlame = _movingTime;
         Vector2 dis = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
         // Debug.Log(transform.position.x + endPos.x);
         // Debug.Log(transform.position.y + endPos.y);
