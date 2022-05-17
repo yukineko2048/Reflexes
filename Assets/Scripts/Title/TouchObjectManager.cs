@@ -8,7 +8,7 @@ public class TouchObjectManager : MonoBehaviour
 
     // タッチされてオブジェクトが移動し始めてから移動がおわるまでの時間(フレーム)
     // この間はタッチされてもUpdatePositionを行わない
-    internal int _movingTime = 30;
+    internal int _movingTime = 7;
 
     private bool isMoving {get;set;}
 
