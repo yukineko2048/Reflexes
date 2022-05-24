@@ -43,7 +43,7 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
         else {
             this._screenRes = new Vector2(worldScreen.x / 2.0f - (this._ITouchObject.Scale.x/2.0f)
                                         , ((panelBodyScreen.y / 2.0f) * (worldScreen.y / 2.0f)) / (panelRootScreen.y / 2.0f) - (this._ITouchObject.Scale.y/2.0f));
-            Debug.Log(this._screenRes);
+            // Debug.Log(this._screenRes);
         }
         this._tra_pos = this.gameObject.transform.position;
     }
@@ -56,7 +56,7 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
     }
 
     // 次に出現させるポジションを作成する
-    void NextNewPosition()
+    private void NextNewPosition()
     {
         float rand_width = Random.Range (-this._screenRes.x, this._screenRes.x);
         float rand_height = Random.Range (-this._screenRes.y, this._screenRes.y);

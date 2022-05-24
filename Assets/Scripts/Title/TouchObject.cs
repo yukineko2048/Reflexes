@@ -12,6 +12,12 @@ public class TouchObject : MonoBehaviour, ITouchObject
     // オブジェクトがタッチされ、移動中はTRUE、静止している際はFALSE
     private bool _isMoving = false;
 
+    private IMovingObjectOnRandom _IMovingObjectOnRandom;
+
+    private void Start() {
+        this._IMovingObjectOnRandom = this.gameObject.transform.GetComponent<IMovingObjectOnRandom>();
+    }
+
     public bool IsMoving
     {
         get { return this._isMoving; }
@@ -34,9 +40,8 @@ public class TouchObject : MonoBehaviour, ITouchObject
 
     public void TouchedObject(){
         if (!this._isMoving){
-            Debug.Log("hoge");
             this._isMoving = true;
-            GetComponent<IMovingObjectOnRandom>();
+            this._IMovingObjectOnRandom.UpdatePosition();
             StartCoroutine("MovingDelay");
         }
     }
