@@ -279,10 +279,10 @@ RectTransform:
   m_Father: {fileID: 1157339628}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1316, y: 2340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &338486296
 MonoBehaviour:
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.497
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -915,9 +915,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 832738255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e29ebf1814f404ea2eb79ba0b89d36, type: 3}
+  m_Script: {fileID: 11500000, guid: 127245a4a1345c74388892666a45ea2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Timer: {fileID: 1479425477}
 --- !u!1 &923353871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1052,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
@@ -1133,9 +1135,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3abbe8bbce39634438f06f6e2fe44e44, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f573664ce9c6f94db9617cfc17bebce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TouchObject: {fileID: 1609429292}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,6 +1155,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43aa50d4d4bb861408b797ee72984347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1028429102
 GameObject:
   m_ObjectHideFlags: 0
@@ -6317,7 +6332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1365684426}
   m_Layer: 0
-  m_Name: TouchObject
+  m_Name: TouchObjectFolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6331,7 +6346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365684425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.33724, y: 0.6117548, z: -4.2788506}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1609429296}
@@ -6413,6 +6428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1479425478}
+  - component: {fileID: 1479425479}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -6441,6 +6457,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1479425479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479425477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba6981e83ddc95468c488e18ac36170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TimerCircle_front: {fileID: 628033770}
+  _TimerText: {fileID: 783683955}
 --- !u!1 &1609429292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6454,11 +6484,11 @@ GameObject:
   - component: {fileID: 1609429294}
   - component: {fileID: 1609429293}
   - component: {fileID: 1609429298}
-  - component: {fileID: 1609429299}
   - component: {fileID: 1609429297}
+  - component: {fileID: 1609429299}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: TouchObject
+  m_TagString: TouchObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6532,8 +6562,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609429292}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.33724, y: -0.6117548, z: 4.2788506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1038066997}
@@ -6668,6 +6698,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1609429292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e87e7c861050bef40b45b3182f7c71c0, type: 3}
+  m_Script: {fileID: 11500000, guid: dc250b00ebd135348af4180bea9abf05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

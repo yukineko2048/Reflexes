@@ -7,8 +7,11 @@ public class GameTimer : MonoBehaviour, IGameTimer
 {
     public Image _TimerCircle_front;
     public Text _TimerText;
+    // 設定する制限時間
     private float _timeLimit;
+    // 現在の時間
     private float _timer;
+    // ゲームが進行しているかどうか
     private bool _isRunning;
 
     public float TimeLimit
