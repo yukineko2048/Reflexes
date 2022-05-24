@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Const;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public GameObject Timer;
     private GameTimer _gameTimer;
