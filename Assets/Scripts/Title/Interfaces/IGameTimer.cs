@@ -15,6 +15,10 @@ public interface IGameTimer
     void InitTimer(float _timeLimit);
     // 開始準備が整い、開始することを告げる機能
     void GameStart();
+    // ゲームポーズボタンを押したときの機能
+    void GamePause();
+    // コンティニューボタンを押したときの機能
+    void GameContinue();
     // 制限時間が経過し、終了したことを告げる機能
     void GameFinish();
 }

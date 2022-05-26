@@ -45,7 +45,7 @@ public class TouchObject : MonoBehaviour, ITouchObject
 
     public void TouchedObject()
     {
-        if (!this._isMoving)
+        if (!this._isMoving && GameManager.Instance._isRunning)
         {
             this._isMoving = true;
             this._IMovingObjectOnRandom.UpdatePosition();

@@ -10,6 +10,8 @@ public class GameTimer : MonoBehaviour, IGameTimer
     private Image _TimerCircle_front;
     [SerializeField]
     private TextMeshProUGUI _TimerCount;
+    [SerializeField]
+    private Button _PauseButton;
     // 設定する制限時間
     private float _timeLimit;
     // 現在の時間
@@ -21,14 +23,17 @@ public class GameTimer : MonoBehaviour, IGameTimer
     {
         get { return this._timeLimit; }
     }
+
     public float Timer
     {
         get { return this._timer; }
     }
+
     public bool IsRunning
     {
         get { return this._isRunning; }
     }
+
     public void InitTimer(float _timeLimit)
     {
         this._timeLimit = _timeLimit;
@@ -36,18 +41,52 @@ public class GameTimer : MonoBehaviour, IGameTimer
         this._isRunning = false;
         this._TimerCount.text = this._timer.ToString("f0");
     }
+
+    private void Start()
+    {
+        // this._PauseButton.onClick.AddListener(GamePause);
+    }
+
     public void GameStart()
     {
-        Debug.Log("開始");
-        this._isRunning = true;
-        GameManager.Instance.GameStart();
+        if (!this._isRunning)
+        {
+            Debug.Log("開始");
+            this._isRunning = true;
+            GameManager.Instance.GameStart();
+        }
     }
+
+    public void GamePause()
+    {
+        if (this._isRunning)
+        {
+            Debug.Log("一時停止");
+            this._isRunning = false;
+            GameManager.Instance.GamePause();
+        }
+    }
+
+    public void GameContinue()
+    {
+        if (!this._isRunning)
+        {
+            Debug.Log("再開");
+            this._isRunning = true;
+            GameManager.Instance.GameContinue();
+        }
+    }
+
     public void GameFinish()
     {
-        Debug.Log("終了");
-        this._isRunning = false;
-        GameManager.Instance.GameFinish();
+        if (this._isRunning)
+        {
+            Debug.Log("終了");
+            this._isRunning = false;
+            GameManager.Instance.GameFinish();
+        }
     }
+
     private void FixedUpdate()
     {
         // ゲーム中
