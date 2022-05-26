@@ -14,13 +14,13 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
 
     private void RequestBanner()
     {
-        #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/6300978111";
-        #elif UNITY_IPHONE
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+#elif UNITY_IPHONE
             string adUnitId = "";
-        #else
+#else
             string adUnitId = "unexpected_platform";
-        #endif
+#endif
 
         // Create a 320x50 banner at the top of the screen.
         this.bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom
@@ -70,12 +70,12 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
     }
 
     //=================================
-   //リワード広告が読み込まれたら実行
-   //=================================
-   public void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
-   {
-       this.bannerView.Show();
-   }
+    //リワード広告が読み込まれたら実行
+    //=================================
+    public void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
+    {
+        this.bannerView.Show();
+    }
 
     // public void HandleOnAdLeavingApplication(object sender, EventArgs args)
     // {

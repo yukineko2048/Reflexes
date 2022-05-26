@@ -16,27 +16,33 @@ public class TouchDecision : MonoBehaviour, ITouchDecision
         get { return this._downFlag; }
     }
 
-    private void Start() {
+    private void Start()
+    {
         this._ITouchObject = this._TouchObject.GetComponent<ITouchObject>();
     }
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             this.OnTapDown();
-        } else if(Input.GetMouseButtonUp(0)) {
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
             this.OnTapUp();
         }
-        if (this._downFlag){
+        if (this._downFlag)
+        {
             this.CheckTouchObject();
         }
     }
 
-    public void CheckTouchObject(){
+    public void CheckTouchObject()
+    {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Debug.Log("hoge");
-        if (Physics.Raycast(ray,out hit,CO.RAYCAST_MAX_DISTANCE)
+        if (Physics.Raycast(ray, out hit, CO.RAYCAST_MAX_DISTANCE)
          && this._TouchObject.tag == hit.collider.gameObject.tag)
         {
             this._ITouchObject.TouchedObject();
@@ -45,11 +51,13 @@ public class TouchDecision : MonoBehaviour, ITouchDecision
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 5);
     }
 
-    public void OnTapDown(){
+    public void OnTapDown()
+    {
         this._downFlag = true;
     }
 
-    public void OnTapUp(){
+    public void OnTapUp()
+    {
         this._downFlag = false;
     }
 }

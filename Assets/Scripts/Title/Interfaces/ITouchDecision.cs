@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ITouchDecision
 {
-    bool DownFlag {get;}
+    bool DownFlag { get; }
     // タッチされているサイの処理
     void CheckTouchObject();
     // タッチ判定があった際の処理

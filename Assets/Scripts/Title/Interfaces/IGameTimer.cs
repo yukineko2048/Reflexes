@@ -4,11 +4,11 @@ using UnityEngine;
 
 public interface IGameTimer
 {
-    float TimeLimit {get;}
+    float TimeLimit { get; }
 
-    float Timer {get;}
+    float Timer { get; }
 
-    bool IsRunning {get;}
+    bool IsRunning { get; }
 
     // タイマーの初期化機能
     // 初期化：タイマーの時間を初期時間にセットし、isStartをfalseにセットする

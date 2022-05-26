@@ -1,5 +1,7 @@
-namespace Const {
-    public static class CO {
+namespace Const
+{
+    public static class CO
+    {
         //---------------------------------------------
         //// *** 環境設定 *** ////
         //---------------------------------------------
@@ -10,10 +12,13 @@ namespace Const {
         //---------------------------------------------
         // 時間制限
         public const int TIME_LIMIT = 60;
-        
+
         // タッチされてオブジェクトが移動し始めてから移動がおわるまでの時間(フレーム)
         // この間はタッチされてもUpdatePositionを行わない
         public const int MOVING_TIME = 7;
+
+        //増加させるスコア量
+        public const int ADD_SCORE = 10;
 
         // 時間制限
         public const float RAYCAST_MAX_DISTANCE = 20.0f;

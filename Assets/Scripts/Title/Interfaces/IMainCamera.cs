@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMainCamera
 {
-    Vector2 WorldScreen {get;}
+    Vector2 WorldScreen { get; }
 }

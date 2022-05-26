@@ -12,13 +12,15 @@ public class PanelRoot : MonoBehaviour, IPanelRoot
     private GameObject _PanelFooter;
     private Vector2 _UIScreen;
 
-    private void Awake() {
+    private void Awake()
+    {
         this._PanelHeader = transform.Find("PanelHeader").gameObject;
         this._PanelBody = transform.Find("PanelBody").gameObject;
         this._PanelFooter = transform.Find("PanelFooter").gameObject;
     }
 
-    private void Start() {
+    private void Start()
+    {
         var canvasRectTransform = transform.parent.gameObject.GetComponent<RectTransform>();
         this._UIScreen = new Vector2(canvasRectTransform.sizeDelta.x, canvasRectTransform.sizeDelta.y);
         // Debug.Log(this._UIScreen);

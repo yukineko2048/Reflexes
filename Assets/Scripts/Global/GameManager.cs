@@ -17,9 +17,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this._IGameTimer.GameStart();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameStart()
     {
+        // ゲーム開始(タイマースタート)
+
+    }
+
+    public void GameFinish()
+    {
+        // ゲーム終了(タイマーフィニッシュ、リタイア、リトライ)
         
     }
 }
