@@ -5,7 +5,8 @@ using Const;
 
 public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
 {
-    public GameObject _PanelRoot;
+    [SerializeField]
+    private GameObject _PanelRoot;
     private Vector3 _tra_pos {get; set;}
     private Vector3 _pre_tra_pos {get; set;}
     private Vector2 _screenRes {get; set;}

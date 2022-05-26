@@ -16,7 +16,7 @@ namespace Const {
         public const int MOVING_TIME = 7;
 
         // 時間制限
-        public const float RAYCAST_MAX_DISTANCE = 10.0f;
+        public const float RAYCAST_MAX_DISTANCE = 20.0f;
     }
 
 }

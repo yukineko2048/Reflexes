@@ -5,7 +5,8 @@ using Const;
 
 public class TouchDecision : MonoBehaviour, ITouchDecision
 {
-    public GameObject _TouchObject;
+    [SerializeField]
+    private GameObject _TouchObject;
     private ITouchObject _ITouchObject;
     // ボタンを押したときtrue、離したときfalseになるフラグ
     private bool _downFlag = false;
@@ -34,12 +35,14 @@ public class TouchDecision : MonoBehaviour, ITouchDecision
     public void CheckTouchObject(){
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        Debug.Log("hoge");
         if (Physics.Raycast(ray,out hit,CO.RAYCAST_MAX_DISTANCE)
          && this._TouchObject.tag == hit.collider.gameObject.tag)
         {
             this._ITouchObject.TouchedObject();
+            Debug.Log("hoge");
         }
-        // Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 5);
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 5);
     }
 
     public void OnTapDown(){

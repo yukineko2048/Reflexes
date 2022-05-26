@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class GameTimer : MonoBehaviour, IGameTimer
 {
-    public Image _TimerCircle_front;
-    public Text _TimerText;
+    [SerializeField]
+    private Image _TimerCircle_front;
+    [SerializeField]
+    public TextMeshProUGUI _TimerText;
     // 設定する制限時間
     private float _timeLimit;
     // 現在の時間

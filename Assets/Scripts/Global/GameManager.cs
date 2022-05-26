@@ -5,15 +5,16 @@ using Const;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    public GameObject Timer;
-    private GameTimer _gameTimer;
+    [SerializeField]
+    private GameObject _GameTimer;
+    private IGameTimer _IGameTimer;
 
     void Start()
     {
         Application.targetFrameRate = CO.TARGET_FRAME_RATE;
-        this._gameTimer = Timer.GetComponent<GameTimer>();
-        this._gameTimer.InitTimer(CO.TIME_LIMIT);
-        this._gameTimer.GameStart();
+        this._IGameTimer = _GameTimer.GetComponent<IGameTimer>();
+        this._IGameTimer.InitTimer(CO.TIME_LIMIT);
+        this._IGameTimer.GameStart();
     }
 
     // Update is called once per frame
