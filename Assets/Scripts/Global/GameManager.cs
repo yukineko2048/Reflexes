@@ -14,14 +14,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField]
     private GameObject _GameTimer;
     [SerializeField]
-    private GameObject _FrontCanvas;
+    private GameObject _PauseMenuPanel;
     private IGameTimer _IGameTimer;
     [NonSerialized] //using System publicだけどInspectorに出さないとき
     public bool _isRunning;
 
     void Start()
     {
-        
         this._isRunning = false;
         Application.targetFrameRate = CO.TARGET_FRAME_RATE;
         this._IGameTimer = _GameTimer.GetComponent<IGameTimer>();
@@ -42,7 +41,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         // ゲーム一時停止(タイマーストップ)
         this._isRunning = this._IGameTimer.IsRunning;
         // ポーズ画面を表示させる
-        this._FrontCanvas.SetActive(true);
+        this.SetActivePauseMenuPanel(true);
     }
 
     public void GameContinue()
@@ -50,13 +49,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         // ゲーム再開(タイマースタート)
         this._isRunning = this._IGameTimer.IsRunning;
         // ポーズ画面を表示させる
-        Debug.Log("asd");
-        this._FrontCanvas.SetActive(false);
+        this.SetActivePauseMenuPanel(false);
     }
 
     public void GameFinish()
     {
         // ゲーム終了(タイマーフィニッシュ、リタイア、リトライ)
         this._isRunning = this._IGameTimer.IsRunning;
+    }
+
+    public void SetActivePauseMenuPanel(bool active)
+    {
+        this._PauseMenuPanel.SetActive(active);
     }
 }

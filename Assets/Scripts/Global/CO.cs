@@ -22,6 +22,12 @@ namespace Const
 
         // 時間制限
         public const float RAYCAST_MAX_DISTANCE = 20.0f;
+
+        // RETRY(文字列)
+        public const string STRING_RETRY = "RETRY";
+
+        // GIVE UP(文字列)
+        public const string STRING_GIVE_UP = "GIVE UP";
     }
 
 }
