@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - TouchObject
+  - PanelHeader
+  - PanelBody
+  - PanelFooter
   layers:
   - Default
   - TransparentFX

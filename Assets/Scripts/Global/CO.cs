@@ -20,6 +20,9 @@ namespace Const
         //増加させるスコア量
         public const int ADD_SCORE = 10;
 
+        // HSVのHの最大値
+        public const int MAXHSVCOLOR = 360;
+
         // 時間制限
         public const float RAYCAST_MAX_DISTANCE = 20.0f;
 
