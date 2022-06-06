@@ -25,6 +25,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Start()
     {
+        Screen.SetResolution(1080, 1920, false);
         this._isRunning = false;
         Application.targetFrameRate = CO.TARGET_FRAME_RATE;
         this._IGameTimer = _GameTimer.GetComponent<IGameTimer>();
