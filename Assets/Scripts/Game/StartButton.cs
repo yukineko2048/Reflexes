@@ -17,18 +17,17 @@ public class StartButton : MonoBehaviour, IStartButton
         for (int i = 0; i < this.gameObject.transform.childCount; ++i)
         {
             if (this.gameObject.transform.GetChild(i).TryGetComponent<Image>(out var image)){
-                Debug.Log(image);
+                // Debug.Log(image);
                 this._NeonImages.Add(image);
             }
             else if (this.gameObject.transform.GetChild(i).TryGetComponent<TextMeshProUGUI>(out var text)){
-                Debug.Log(text);
+                // Debug.Log(text);
                 this._NeonTexts.Add(text);
             }
             else{
                 Debug.LogError("判定できない種類の子が存在しています");
             }
         }
-        Debug.Log(this._NeonImages);
         this._childCount = this.gameObject.transform.childCount;
     }
 
