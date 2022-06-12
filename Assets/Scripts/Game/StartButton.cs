@@ -14,33 +14,47 @@ public class StartButton : MonoBehaviour, IStartButton
 
     private void Start()
     {
+        // スタートボタンが押され時の処理の設定
+        this.gameObject.GetComponent<Button>().onClick.AddListener(ButtonTouched);
+
         for (int i = 0; i < this.gameObject.transform.childCount; ++i)
         {
-            if (this.gameObject.transform.GetChild(i).TryGetComponent<Image>(out var image)){
+            if (this.gameObject.transform.GetChild(i).TryGetComponent<Image>(out var image))
+            {
                 // Debug.Log(image);
                 this._NeonImages.Add(image);
             }
-            else if (this.gameObject.transform.GetChild(i).TryGetComponent<TextMeshProUGUI>(out var text)){
+            else if (this.gameObject.transform.GetChild(i).TryGetComponent<TextMeshProUGUI>(out var text))
+            {
                 // Debug.Log(text);
                 this._NeonTexts.Add(text);
             }
-            else{
+            else
+            {
                 Debug.LogError("判定できない種類の子が存在しています");
             }
         }
         this._childCount = this.gameObject.transform.childCount;
     }
 
+    public void ButtonTouched()
+    {
+        GameManager.Instance.GameStart();
+    }
+
     private void FixedUpdate()
     {
         ++this._HSVColorCount;
-        if (this._HSVColorCount > CO.MAXHSVCOLOR) {
+        if (this._HSVColorCount > CO.MAXHSVCOLOR)
+        {
             this._HSVColorCount = 0;
         }
-        foreach (Image image in this._NeonImages) {
+        foreach (Image image in this._NeonImages)
+        {
             image.color = Color.HSVToRGB((float)this._HSVColorCount / 360.0f, 1, 1);
         }
-        foreach (TextMeshProUGUI text in this._NeonTexts) {
+        foreach (TextMeshProUGUI text in this._NeonTexts)
+        {
             text.color = Color.HSVToRGB((float)this._HSVColorCount / 360.0f, 1, 1);
         }
     }

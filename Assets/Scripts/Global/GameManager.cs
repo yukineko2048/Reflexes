@@ -33,20 +33,27 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this._ContinueButton.onClick.AddListener(this._IGameTimer.GameContinue);
         this._IGameTimer.InitTimer(CO.TIME_LIMIT);
         // スタートボタンが押されたタイミングに移動
-        this.GameStart();
+        // this.GameStart();
+
+        // 初期化
+        this.Initialize();
     }
 
     // アプリ起動時
     public void Initialize()
     {
-        this._GamePlayCanavs.SetActive(false);
-        this._TitleCanavs.SetActive(true);
+        // this._GamePlayCanavs.SetActive(false);
+        // this._TitleCanavs.SetActive(true);
+        TitleManager.Instance.Initialize();
     }
 
     // playgame押したときの処理
     public void GameStart()
     {
-        // ゲーム開始(タイマースタート)
+        // **ゲーム開始**
+        // ゲーム画面遷移
+        this._TitleCanavs.SetActive(false);
+        // タイマースタート
         this._IGameTimer.GameStart();
         this._isRunning = this._IGameTimer.IsRunning;
     }
