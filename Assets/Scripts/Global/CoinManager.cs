@@ -10,12 +10,12 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
     void Start()
     {
         // 取得できなければ0を返す
-        this._coins = PlayerPrefs.GetInt("Score", 0);
+        this._coins = this.GetCoin();
     }
 
     public int GetCoin()
     {
-        return this._coins;
+        return PlayerPrefs.GetInt("Coins", 0);
     }
 
     // コイン加算

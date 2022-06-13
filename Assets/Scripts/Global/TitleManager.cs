@@ -24,6 +24,12 @@ public class TitleManager : SingletonMonoBehaviour<TitleManager>
         this._Version.GetComponent<Text>().text = CO.STRING_GAME_VERSION;
     }
 
+    // コインの更新処理
+    public void CoinUpdate()
+    {
+        this._CoinValue.GetComponent<TextMeshProUGUI>().text = CoinManager.Instance.GetCoin().ToString();
+    }
+
     public void ActiveTrueCustomPanel()
     {
         this.SetActiveCustomPanel(true);
