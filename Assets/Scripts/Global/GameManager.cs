@@ -20,18 +20,24 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private GameObject _GamePlayCanavs;
     [SerializeField]
     private GameObject _TitleCanavs;
+    [SerializeField]
+    private GameObject _TouchObject;
+    private ITouchObject _ITouchObject;
+    private IMovingObjectOnRandom _IMovingObjectOnRandom;
     [NonSerialized] //using System publicだけどInspectorに出さないとき
     public bool _isRunning;
 
     void Start()
     {
         Screen.SetResolution(1080, 1920, false);
-        this._isRunning = false;
         Application.targetFrameRate = CO.TARGET_FRAME_RATE;
+        this._ITouchObject = this._TouchObject.GetComponent<ITouchObject>();
+        this._IMovingObjectOnRandom = this._TouchObject.GetComponent<IMovingObjectOnRandom>();
         this._IGameTimer = _GameTimer.GetComponent<IGameTimer>();
         this._PauseButton.onClick.AddListener(this._IGameTimer.GamePause);
         this._ContinueButton.onClick.AddListener(this._IGameTimer.GameContinue);
-        this._IGameTimer.InitTimer(CO.TIME_LIMIT);
+        this._IGameTimer.Initialize(CO.TIME_LIMIT);
+        this._isRunning = this._IGameTimer.IsRunning;
         // スタートボタンが押されたタイミングに移動
         // this.GameStart();
 
@@ -53,6 +59,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         // **ゲーム開始**
         // ゲーム画面遷移
         this._TitleCanavs.SetActive(false);
+        // 初期化処理
+
         // タイマースタート
         this._IGameTimer.GameStart();
         this._isRunning = this._IGameTimer.IsRunning;
@@ -88,5 +96,39 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void SetActivePauseMenuPanel(bool active)
     {
         this._PauseMenuPanel.SetActive(active);
+    }
+
+    // ギブアップ処理
+    public void GiveUp()
+    {
+        // タイマー初期化
+        this._IGameTimer.Initialize(CO.TIME_LIMIT);
+        this._isRunning = this._IGameTimer.IsRunning;
+        // スコア、コンボ初期化
+        ScoreManager.Instance.Initialize();
+        // オブジェクトの位置初期化(z座標は初期化に関係ないので今までと同じ値を用いる)
+        var objPos = this._ITouchObject.Position;
+        this._ITouchObject.Position = new Vector3(0,0,objPos.z);
+        // 計算用のオブジェクトの位置の値初期化
+        this._IMovingObjectOnRandom.SetPosition(Vector3.zero);
+        // 初期化が終わったのでタイトル画面へ遷移
+        this._TitleCanavs.SetActive(true);
+    }
+
+    // リトライ処理
+    public void Retry()
+    {
+        // タイマー初期化
+        this._IGameTimer.Initialize(CO.TIME_LIMIT);
+        this._isRunning = this._IGameTimer.IsRunning;
+        // スコア、コンボ初期化
+        ScoreManager.Instance.Initialize();
+        // オブジェクトの位置初期化(z座標は初期化に関係ないので今までと同じ値を用いる)
+        var objPos = this._ITouchObject.Position;
+        this._ITouchObject.Position = new Vector3(0,0,objPos.z);
+        // 計算用のオブジェクトの位置の値初期化
+        this._IMovingObjectOnRandom.SetPosition(Vector3.zero);
+        // 初期化が終わったので再スタート
+        this.GameStart();
     }
 }

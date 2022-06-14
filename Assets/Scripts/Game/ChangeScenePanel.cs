@@ -37,11 +37,17 @@ public class ChangeScenePanel : MonoBehaviour, IChangeScenePanel
     {
         if (this._text == CO.STRING_RETRY)
         {
+            // リトライ処理
             Debug.Log("リトライします");
+            this.UnDActiveChangeScenePanel();
+            GameManager.Instance.Retry();
         }
         else if (this._text == CO.STRING_GIVE_UP)
         {
+            // ギブアップ処理
             Debug.Log("ギブアップします");
+            this.UnDActiveChangeScenePanel();
+            GameManager.Instance.GiveUp();
         }
     }
 

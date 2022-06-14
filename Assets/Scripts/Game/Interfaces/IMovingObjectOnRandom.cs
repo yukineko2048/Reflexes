@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IMovingObjectOnRandom
 {
     void UpdatePosition();
+
+    void SetPosition(Vector3 pos);
 }

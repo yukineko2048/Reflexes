@@ -34,17 +34,12 @@ public class GameTimer : MonoBehaviour, IGameTimer
         get { return this._isRunning; }
     }
 
-    public void InitTimer(float _timeLimit)
+    public void Initialize(float _timeLimit)
     {
         this._timeLimit = _timeLimit;
         this._timer = this._timeLimit;
         this._isRunning = false;
         this._TimerCount.text = this._timer.ToString("f0");
-    }
-
-    private void Start()
-    {
-        // this._PauseButton.onClick.AddListener(GamePause);
     }
 
     public void GameStart()
@@ -87,6 +82,7 @@ public class GameTimer : MonoBehaviour, IGameTimer
         }
     }
 
+    // ゲームのFPSは60で固定しているので1/60秒で呼び出される
     private void FixedUpdate()
     {
         // ゲーム中

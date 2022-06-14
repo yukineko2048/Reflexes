@@ -14,42 +14,48 @@ public class TouchObject : MonoBehaviour, ITouchObject
     // オブジェクトがタッチされ、移動中はTRUE、静止している際はFALSE
     private bool _isMoving = false;
 
+    // オブジェクトがタッチされて次にタッチされるまでを測定した
+    private int _frameCount = 0;
+
     private IMovingObjectOnRandom _IMovingObjectOnRandom;
-    private IScore _IScore;
 
     private void Start()
     {
         this._IMovingObjectOnRandom = this.gameObject.transform.GetComponent<IMovingObjectOnRandom>();
-        this._IScore = this._Score.GetComponent<IScore>();
     }
 
     public bool IsMoving
     {
         get { return this._isMoving; }
     }
+
     public Vector3 Position
     {
         get { return this.gameObject.transform.position; }
         set { this.gameObject.transform.position = value; }
     }
+
     public Quaternion Rotate
     {
         get { return this.gameObject.transform.rotation; }
         set { this.gameObject.transform.rotation = value; }
     }
+
     public Vector3 Scale
     {
         get { return this.gameObject.transform.localScale; }
         set { this.gameObject.transform.localScale = value; }
     }
 
-    public void TouchedObject()
+    public void TouchedObject(int frameCount)
     {
         if (!this._isMoving && GameManager.Instance._isRunning)
         {
             this._isMoving = true;
             this._IMovingObjectOnRandom.UpdatePosition();
-            this._IScore.AddScore();
+            int comboFrame = CO.COMBO_EXTENSION_FRAME - (frameCount - this._frameCount);
+            this._frameCount = frameCount;
+            ScoreManager.Instance.AddScore(comboFrame);
             StartCoroutine("MovingDelay");
         }
     }

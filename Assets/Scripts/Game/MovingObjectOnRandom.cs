@@ -58,6 +58,12 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
         // this.gameObject.transform.localPosition = this._tra_pos;
     }
 
+    // 次に出現させるポジションを任意で作成する(pos.zは関係ないので今まで同じ値を用いる)
+    public void SetPosition(Vector3 pos)
+    {
+        this._tra_pos = new Vector3(pos.x,pos.y,this._tra_pos.z);
+    }
+
     // 次に出現させるポジションを作成する
     private void NextNewPosition()
     {
@@ -68,7 +74,7 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
         StartCoroutine("MoveTouchObject");
         this._tra_pos = this._endPos;
     }
-
+    
     IEnumerator MoveTouchObject()
     {
         var actionFlame = _movingTime;

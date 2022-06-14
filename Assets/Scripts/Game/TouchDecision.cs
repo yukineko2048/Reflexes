@@ -44,7 +44,7 @@ public class TouchDecision : MonoBehaviour, ITouchDecision
         if (Physics.Raycast(ray, out hit, CO.RAYCAST_MAX_DISTANCE)
          && this._TouchObject.tag == hit.collider.gameObject.tag)
         {
-            this._ITouchObject.TouchedObject();
+            this._ITouchObject.TouchedObject(Time.frameCount);
         }
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 5);
     }

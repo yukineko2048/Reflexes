@@ -23,11 +23,17 @@ namespace Const
         //増加させるスコア量
         public const int ADD_SCORE = 10;
 
+        // コンボを継続させるための猶予フレーム
+        public const int COMBO_EXTENSION_FRAME = 30;
+
         // HSVのHの最大値
         public const int MAXHSVCOLOR = 360;
 
         // 時間制限
         public const float RAYCAST_MAX_DISTANCE = 20.0f;
+
+        // コンボ倍率
+        public const float COMBO_MAGNIFICATION = 0.1f;
 
         // RETRY(文字列)
         public const string STRING_RETRY = "RETRY";

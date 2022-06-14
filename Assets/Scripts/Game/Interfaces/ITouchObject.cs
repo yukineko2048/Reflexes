@@ -9,5 +9,5 @@ public interface ITouchObject
     Vector3 Scale { get; set; }
     bool IsMoving { get; }
     // オブジェクトがタッチされたときの処理
-    void TouchedObject();
+    void TouchedObject(int frameCount);
 }
