@@ -14,7 +14,7 @@ namespace Const
         //// *** ゲーム設定 *** ////
         //---------------------------------------------
         // 時間制限
-        public const int TIME_LIMIT = 60;
+        public const int TIME_LIMIT = 5;
 
         // タッチされてオブジェクトが移動し始めてから移動がおわるまでの時間(フレーム)
         // この間はタッチされてもUpdatePositionを行わない
@@ -41,5 +41,10 @@ namespace Const
         // GIVE UP(文字列)
         public const string STRING_GIVE_UP = "GIVE UP";
     }
-
+    // テスト、デバッグ用定数(リリース対応時にすべて削除)
+    public static class TEST
+    {
+        // 取得コイン数
+        public const int GETCOINS = 100;
+    }
 }

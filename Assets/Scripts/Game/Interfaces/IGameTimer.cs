@@ -12,7 +12,7 @@ public interface IGameTimer
 
     // タイマーの初期化機能
     // 初期化：タイマーの時間を初期時間にセットし、isStartをfalseにセットする
-    void Initialize(float _timeLimit);
+    void Initialize(int timeLimit);
     // 開始準備が整い、開始することを告げる機能
     void GameStart();
     // ゲームポーズボタンを押したときの機能

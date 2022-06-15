@@ -22,6 +22,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
     public void AddCoin(int addCoins)
     {
         PlayerPrefs.SetInt("Coins", this._coins + addCoins);
+        this._coins += addCoins;
         Debug.Log($"コインを加算.コイン数:{PlayerPrefs.GetInt("Coins")}");
     }
 
@@ -31,6 +32,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
         if (this._coins >= subCoins)
         {
             PlayerPrefs.SetInt("Coins", this._coins - subCoins);
+            this._coins -= subCoins;
             Debug.Log($"コインを減算.コイン数:{PlayerPrefs.GetInt("Coins")}");
         }
     }

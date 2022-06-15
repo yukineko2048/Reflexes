@@ -10,10 +10,22 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private TextMeshProUGUI _ScoreCount;
     private int _scoreValue = 0;
     private int _comboCount = 0;
+    private int _maxComboCount = 0;
+    private int _touchObjectCount = 0;
 
     public int ScoreValue
     {
         get { return this._scoreValue; }
+    }
+
+    public int MaxComboCount
+    {
+        get { return this._maxComboCount; }
+    }
+
+    public int TouchObjectCount
+    {
+        get { return this._touchObjectCount; }
     }
 
     private void Start()
@@ -25,11 +37,15 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         this._scoreValue = 0;
         this._comboCount = 0;
+        this._maxComboCount = 0;
+        this._touchObjectCount = 0;
         this.UpdateScore();
     }
 
     public void AddScore(int comboFrame)
     {
+        // 共通処理
+        ++this._touchObjectCount;
         // コンボ猶予フレームをオーバーしたのでコンボを途切れさせる
         if (comboFrame < 0)
         {
@@ -42,6 +58,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
             ++this._comboCount;
             this._scoreValue += (int)(comboFrame * CO.ADD_SCORE * (this._comboCount * CO.COMBO_MAGNIFICATION + 1));
             Debug.Log($"コンボ!!{this._comboCount}");
+        }
+        if (this._comboCount > this._maxComboCount)
+        {
+            this._maxComboCount = this._comboCount;
         }
         this.UpdateScore();
     }
@@ -61,5 +81,12 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     public int GetHighScore()
     {
         return PlayerPrefs.GetInt("HighScore", 0);
+    }
+
+    // スコアから獲得コイン数を計算する
+    public int MathGetCoins()
+    {
+        // テスト中
+        return TEST.GETCOINS;
     }
 }

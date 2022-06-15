@@ -34,9 +34,9 @@ public class GameTimer : MonoBehaviour, IGameTimer
         get { return this._isRunning; }
     }
 
-    public void Initialize(float _timeLimit)
+    public void Initialize(int timeLimit)
     {
-        this._timeLimit = _timeLimit;
+        this._timeLimit = timeLimit;
         this._timer = this._timeLimit;
         this._isRunning = false;
         this._TimerCount.text = this._timer.ToString("f0");
@@ -48,7 +48,6 @@ public class GameTimer : MonoBehaviour, IGameTimer
         {
             Debug.Log("開始");
             this._isRunning = true;
-            GameManager.Instance.GameStart();
         }
     }
 
