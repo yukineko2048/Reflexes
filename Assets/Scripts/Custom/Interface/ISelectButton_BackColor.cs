@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISelectButton_BackColor
 {
-
+    void InstantiateButton();
 }

@@ -8,12 +8,11 @@ public class SelectButtonManager : MonoBehaviour
     private List<Button> buttons = new List<Button>();
     // このスクリプトの孫に当たるContent
     private Transform Content;
-    private void Awake()
+    public void Initialize()
     {
         Content = transform.Find("Scroll View/Viewport/Content");
         foreach (Transform child in Content)
         {
-            Debug.Log(child.name);
             buttons.Add(child.gameObject.GetComponent<Button>());
             // ボタンを押したときの処理の追加
             child.gameObject.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(child));

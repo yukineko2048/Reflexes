@@ -4,5 +4,9 @@ using UnityEngine;
 
 public interface ISelectButton
 {
-    void Selected();
+    AudioClip AudioClip { get; set; }
+
+    void Selected(SelectButton_Sound selectButton_Sound = null);
+
+    void SetAudioClip(AudioClip audioClip);
 }

@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class SelectButton : MonoBehaviour, ISelectButton
 {
-    public void Selected()
+    private AudioClip _audioClip;
+    private SelectButton_Sound _selectButton_Sound;
+
+    public AudioClip AudioClip
     {
+        get { return this._audioClip; }
+        set { this._audioClip = value; }
+    }
+
+    public void Selected(SelectButton_Sound selectButton_Sound)
+    {
+        // 2回目移行は初回にはいったSelectButton_Soundがはいるようになる
+        this._selectButton_Sound = selectButton_Sound ?? this._selectButton_Sound;
         // フレームをactiveにする
         this.gameObject.transform.Find("SelectFrame").gameObject.SetActive(true);
-        // ボタンにAudio Sourceがコンポーネントとして付与されていたらサンプル音声を流す
-        // AudioSource audioSource = this.gameObject.GetComponent<AudioSource>();
-        // if (audioSource)
-        // {
-        //     if (!audioSource.clip)
-        //     {
-        //         Debug.LogError("audioSourceは存在しているがクリップが存在していない");
-        //     }
-        //     audioSource.PlayOneShot(audioSource.clip);
-        // }
+        if (this._audioClip)
+        {
+            this._selectButton_Sound.AudioClipPlayOneShot(this._audioClip);
+        }
+    }
+
+    public void SetAudioClip(AudioClip audioClip)
+    {
+        Debug.Log(this.gameObject.GetComponent<AudioSource>().clip);
+        this.gameObject.GetComponent<AudioSource>().clip = audioClip;
+        Debug.Log(audioClip.name);
+        Debug.Log(this.gameObject.GetComponent<AudioSource>().clip);
     }
 }

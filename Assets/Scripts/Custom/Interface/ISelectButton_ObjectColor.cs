@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISelectButton_ObjectColor
 {
-
+    void InstantiateButton();
 }

@@ -46,7 +46,6 @@ public class ResultManager : SingletonMonoBehaviour<ResultManager>
 
     private void GetCoin()
     {
-        
         CoinManager.Instance.AddCoin(ScoreManager.Instance.MathGetCoins());
     }
 }
