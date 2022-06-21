@@ -13,7 +13,7 @@ public class SelectButton : MonoBehaviour, ISelectButton
         set { this._audioClip = value; }
     }
 
-    public void Selected(SelectButton_Sound selectButton_Sound)
+    public void Selected(SelectButton_Sound selectButton_Sound = null)
     {
         // 2回目移行は初回にはいったSelectButton_Soundがはいるようになる
         this._selectButton_Sound = selectButton_Sound ?? this._selectButton_Sound;

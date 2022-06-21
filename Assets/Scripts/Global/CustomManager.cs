@@ -13,8 +13,13 @@ public class CustomManager : SingletonMonoBehaviour<CustomManager>
     // カスタム画面で使用する共通ボタン
     public GameObject _PrefabButton;
 
-    private void Start()
+    // CustomButtonGenerateは一度しか呼びたくないのでそのフラグ用
+    private bool once = false;
+
+    public void CustomButtonGenerate()
     {
+        if (once) return;
+        once = true;
         // Instantiateでボタンの生成
         this._ObjectColor.GetComponent<ISelectButton_ObjectColor>().InstantiateButton();
         this._BackColor.GetComponent<ISelectButton_BackColor>().InstantiateButton();

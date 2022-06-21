@@ -8,7 +8,7 @@ public class GoogleMobileAdsDemoScript : SingletonMonoBehaviour<GoogleMobileAdsD
     private BannerView bannerView;
 
     private RewardedAd rewardedAd;
-    public void Start()
+    public void AdStart()
     {
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(initStatus => { });

@@ -31,8 +31,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
+        // 広告の起動
+        GoogleMobileAdsDemoScript.Instance.AdStart();
+        // 解像度の設定
         Screen.SetResolution(1080, 1920, false);
+        // 動作フレームの固定
         Application.targetFrameRate = CO.TARGET_FRAME_RATE;
+        // セーブデータのロード
+        SaveManager.Instance.Load();
+
+        // 各変数の初期化
         this._ITouchObject = this._TouchObject.GetComponent<ITouchObject>();
         this._IMovingObjectOnRandom = this._TouchObject.GetComponent<IMovingObjectOnRandom>();
         this._IGameTimer = _GameTimer.GetComponent<IGameTimer>();
@@ -42,6 +50,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this._isRunning = this._IGameTimer.IsRunning;
 
         // 初期化処理
+        CustomManager.Instance.CustomButtonGenerate();
         this.GameInitialize();
 
         // 初期化(ゲーム開始時はタイトル画面)

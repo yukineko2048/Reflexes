@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ISelectButton_Sound
 {
+    AudioClip[] AudioClip{get;}
     void InstantiateButton();
 
     void AudioClipPlayOneShot(AudioClip audioClip);

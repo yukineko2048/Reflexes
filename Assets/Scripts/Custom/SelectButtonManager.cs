@@ -7,25 +7,31 @@ public class SelectButtonManager : MonoBehaviour
 {
     private List<Button> buttons = new List<Button>();
     // このスクリプトの孫に当たるContent
-    private Transform Content;
-    public void Initialize()
+    private Transform _buttonsParent;
+    public void Initialize(bool[] selected, bool[] unlock)
     {
-        Content = transform.Find("Scroll View/Viewport/Content");
-        foreach (Transform child in Content)
+        this._buttonsParent = transform.Find("Scroll View/Viewport/Content");
+        for (int i = 0; i < this._buttonsParent.childCount; ++i)
         {
-            buttons.Add(child.gameObject.GetComponent<Button>());
+            buttons.Add(this._buttonsParent.GetChild(i).gameObject.GetComponent<Button>());
+            // アンロックされているかどうかPlayerPrefsから取得
+            if (!unlock[i])
+            {
+                // ロックされているのでinteractableをfalse
+                this.SetButtonInteractable(this._buttonsParent.GetChild(i), false);
+            }
             // ボタンを押したときの処理の追加
-            child.gameObject.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(child));
+            this._buttonsParent.GetChild(i).gameObject.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(this._buttonsParent.GetChild(i)));
         }
-        this.SelectButtonFrameInvisible(Content);
+        this.SelectButtonFrameInvisible(this._buttonsParent);
         // 現在選択されているボタンにフレームを付ける
-        
+
     }
 
     private void SelectedButton(Transform child)
     {
         // 初期化
-        this.SelectButtonFrameInvisible(Content);
+        this.SelectButtonFrameInvisible(this._buttonsParent);
         // 選択フレームを出す
         child.gameObject.GetComponent<ISelectButton>().Selected();
     }
@@ -36,5 +42,11 @@ public class SelectButtonManager : MonoBehaviour
         {
             child.Find("SelectFrame").gameObject.SetActive(false);
         }
+    }
+
+    private void SetButtonInteractable(Transform child, bool flag)
+    {
+        child.gameObject.GetComponent<Button>().interactable = flag;
+        child.gameObject.transform.Find("LockPanel").gameObject.SetActive(!flag);
     }
 }
