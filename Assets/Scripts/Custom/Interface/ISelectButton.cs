@@ -6,7 +6,7 @@ public interface ISelectButton
 {
     AudioClip AudioClip { get; set; }
 
-    void Selected(SelectButton_Sound selectButton_Sound = null);
+    void Selected(bool playOneShot, SelectButton_Sound selectButton_Sound = null);
 
     void SetAudioClip(AudioClip audioClip);
 }

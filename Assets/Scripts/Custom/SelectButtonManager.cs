@@ -2,28 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SelectButtonManager : MonoBehaviour
 {
-    private List<Button> buttons = new List<Button>();
     // このスクリプトの孫に当たるContent
     private Transform _buttonsParent;
-    public void Initialize(bool[] selected, bool[] unlock)
+    public void Initialize(bool[] selected, bool[] unlock, string[] name, int[] sellingPrice)
     {
         this._buttonsParent = transform.Find("Scroll View/Viewport/Content");
         for (int i = 0; i < this._buttonsParent.childCount; ++i)
         {
-            buttons.Add(this._buttonsParent.GetChild(i).gameObject.GetComponent<Button>());
-            // アンロックされているかどうかPlayerPrefsから取得
+            var button = this._buttonsParent.GetChild(i).Find("SelectButton").gameObject;
+            // アンロックされているかどうかセーブデータから取得
             if (!unlock[i])
             {
                 // ロックされているのでinteractableをfalse
-                this.SetButtonInteractable(this._buttonsParent.GetChild(i), false);
+                this.SetButtonInteractable(button.transform, false);
+                // アンロックに必要なコイン数を表示
+                this._buttonsParent.GetChild(i).Find("SellingPrice").gameObject.SetActive(true);
+                // ロックimageの表示
+                button.transform.Find("LockPanel").gameObject.SetActive(true);
             }
+            
+            // 選択されているかどうかセーブデータから取得
+            if (selected[i])
+            {
+                // 選択フレームを出す
+                button.GetComponent<ISelectButton>().Selected(false);
+            }
+            var child = button;
             // ボタンを押したときの処理の追加
-            this._buttonsParent.GetChild(i).gameObject.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(this._buttonsParent.GetChild(i)));
+            button.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(child.transform));
+            // ボタンのnameを設定
+            button.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name[i];
+            // 売値を設定
+            this._buttonsParent.GetChild(i).Find("SellingPrice").GetComponent<TextMeshProUGUI>().text = sellingPrice[i].ToString();
         }
-        this.SelectButtonFrameInvisible(this._buttonsParent);
         // 現在選択されているボタンにフレームを付ける
 
     }
@@ -33,14 +48,14 @@ public class SelectButtonManager : MonoBehaviour
         // 初期化
         this.SelectButtonFrameInvisible(this._buttonsParent);
         // 選択フレームを出す
-        child.gameObject.GetComponent<ISelectButton>().Selected();
+        child.gameObject.GetComponent<ISelectButton>().Selected(true);
     }
 
     private void SelectButtonFrameInvisible(Transform Content)
     {
         foreach (Transform child in Content)
         {
-            child.Find("SelectFrame").gameObject.SetActive(false);
+            child.Find("SelectButton/SelectFrame").gameObject.SetActive(false);
         }
     }
 

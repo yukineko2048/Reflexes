@@ -13,13 +13,13 @@ public class SelectButton : MonoBehaviour, ISelectButton
         set { this._audioClip = value; }
     }
 
-    public void Selected(SelectButton_Sound selectButton_Sound = null)
+    public void Selected(bool playOneShot, SelectButton_Sound selectButton_Sound = null)
     {
         // 2回目移行は初回にはいったSelectButton_Soundがはいるようになる
         this._selectButton_Sound = selectButton_Sound ?? this._selectButton_Sound;
         // フレームをactiveにする
         this.gameObject.transform.Find("SelectFrame").gameObject.SetActive(true);
-        if (this._audioClip)
+        if (this._audioClip && playOneShot)
         {
             this._selectButton_Sound.AudioClipPlayOneShot(this._audioClip);
         }

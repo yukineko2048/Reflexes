@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CustomManager : SingletonMonoBehaviour<CustomManager>
 {
@@ -12,6 +13,9 @@ public class CustomManager : SingletonMonoBehaviour<CustomManager>
     private GameObject _Sound;
     // カスタム画面で使用する共通ボタン
     public GameObject _PrefabButton;
+    // コインテキスト
+    [SerializeField]
+    private TextMeshProUGUI CoinValue;
 
     // CustomButtonGenerateは一度しか呼びたくないのでそのフラグ用
     private bool once = false;

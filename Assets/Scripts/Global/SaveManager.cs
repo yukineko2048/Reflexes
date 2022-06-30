@@ -21,33 +21,36 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         filePath = Application.persistentDataPath + "/" + ".savedata.json";
         Debug.Log(Application.persistentDataPath);
         save = new SaveData();
+        // this.Initialize();
+        // this.Save();
     }
 
+    // セーブデータの初期化の時に使う(普段使いではない)
     private void Initialize()
     {
         // 初期化処理
         // 1番目のカスタムデータを選択済み、ロック解除にする
-        var firstData_ObjectColor = new ObjectColor(true, true);
+        var firstData_ObjectColor = new ObjectColor(true, true, "test", 123);
         save.objectColor.Add(firstData_ObjectColor);
-        var firstData_BackColor = new BackColor(true, true);
+        var firstData_BackColor = new BackColor(true, true, "test", 123);
         save.backColor.Add(firstData_BackColor);
-        var firstData_Sound = new Sound(true, true);
+        var firstData_Sound = new Sound(true, true, "test", 123);
         save.sound.Add(firstData_Sound);
 
         // 2番目移行のデータは選択済みではない、ロック解除ではないにする
-        var data_ObjectColor = new ObjectColor(false, false);
+        var data_ObjectColor = new ObjectColor(false, false, "test", 123);
         var objectColorCount = this._ObjectColor.GetComponent<ISelectButton_ObjectColor>().Color.Length;
         for (int i = 1; i < objectColorCount; ++i)
         {
             save.objectColor.Add(data_ObjectColor);
         }
-        var data_BackColor = new BackColor(false, false);
+        var data_BackColor = new BackColor(false, false, "test", 123);
         var backColorCount = this._BackColor.GetComponent<ISelectButton_BackColor>().Color.Length;
         for (int i = 1; i < backColorCount; ++i)
         {
             save.backColor.Add(data_BackColor);
         }
-        var data_Sound = new Sound(false, false);
+        var data_Sound = new Sound(false, false, "test", 123);
         var soundCount = this._Sound.GetComponent<ISelectButton_Sound>().AudioClip.Length;
         for (int i = 1; i < soundCount; ++i)
         {
@@ -55,12 +58,20 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         }
     }
 
+
+    private void SetTestData()
+    {
+        var firstData_ObjectColor = new ObjectColor(true, true, "test", 123);
+        save.objectColor.Add(firstData_ObjectColor);
+        var firstData_BackColor = new BackColor(true, true, "test", 123);
+        save.backColor.Add(firstData_BackColor);
+    }
+    
     public void Save()
     {
         string json = JsonUtility.ToJson(save);
         StreamWriter streamWriter = new StreamWriter(filePath);
         streamWriter.Write(json);
-        streamWriter.Flush();
         streamWriter.Close();
     }
 
@@ -68,10 +79,8 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
     {
         if (File.Exists(filePath))
         {
-            StreamReader streamReader;
-            streamReader = new StreamReader(filePath);
+            StreamReader streamReader = new StreamReader(filePath);
             string data = streamReader.ReadToEnd();
-            Debug.Log(data);
             streamReader.Close();
             save = JsonUtility.FromJson<SaveData>(data);
             Debug.Log(save.objectColor[0].ToString());
