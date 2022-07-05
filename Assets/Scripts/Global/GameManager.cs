@@ -21,6 +21,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private GameObject _TouchObject;
     [SerializeField]
     private GameObject _ResultCanavs;
+    [SerializeField, ReadOnly]
+    private AudioClip _TouchSound;
     [NonSerialized] //using System publicだけどInspectorに出さないとき
     public bool _isRunning;
 
@@ -28,6 +30,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private IGameTimer _IGameTimer;
     private IMovingObjectOnRandom _IMovingObjectOnRandom;
 
+    // セーブファイルのパス
+    [NonSerialized]
+    public string filePath;
+
+    new private void Awake()
+    {
+        filePath = Application.persistentDataPath + "/." + CO.SAVE_FILE_NAME;
+    }
 
     private void Start()
     {
@@ -55,6 +65,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         // 初期化(ゲーム開始時はタイトル画面)
         this.Title();
+
+        // SetObjectColor(Color.red);
+        // SetBackColor(Color.red);
     }
 
     // アプリ起動時
@@ -72,7 +85,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this._TitleCanavs.SetActive(false);
         this._ResultCanavs.SetActive(true);
         ResultManager.Instance.ShowResult();
-    }    
+    }
 
     // playgame押したときの処理
     public void GameStart()
@@ -139,6 +152,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this.GameStart();
     }
 
+    // カスタム画面に入ったのでファイル操作を開始
+    public void ActiveCustomPanel()
+    {
+
+    }
+    // カスタム画面を出たのでファイル操作を終了
+    public void UnActiveCustomPanel()
+    {
+
+    }
+
     // ゲームのリセット処理(ゲームスタートをおしたらゲームが開始できる状態にする)
     private void GameInitialize()
     {
@@ -155,5 +179,41 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this._ITouchObject.Position = new Vector3(0, 0, objPos.z);
         // 計算用のオブジェクトの位置の値初期化
         this._IMovingObjectOnRandom.SetPosition(Vector3.zero);
+    }
+
+    public void SetObjectColor(Color color)
+    {
+        var touchObject = GameObject.FindGameObjectsWithTag("TouchObject");
+        foreach (var obj in touchObject)
+        {
+            // 3Dオブジェクトの場合、MeshRendererのmaterialのcolorを変更
+            if (obj.TryGetComponent(out MeshRenderer comp))
+            {
+                comp.material.color = color;
+            }
+            // imageの場合、Imageのcolorを変更
+            else if (obj.TryGetComponent(out Image image))
+            {
+                image.color = color;
+            }
+        }
+    }
+
+    public void SetBackColor(Color color)
+    {
+        var backPanel = GameObject.FindGameObjectsWithTag("BackPanel");
+        foreach (var obj in backPanel)
+        {
+            // imageの場合、Imageのcolorを変更
+            if (obj.TryGetComponent(out Image image))
+            {
+                image.color = color;
+            }
+        }
+    }
+
+    public void SetTouchSound(AudioClip clip)
+    {
+        this._TouchSound = clip;
     }
 }

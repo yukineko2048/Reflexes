@@ -2,6 +2,7 @@ using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
 using Utile;
+using Const;
 
 public class SaveManager : SingletonMonoBehaviour<SaveManager>
 {
@@ -18,8 +19,6 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
 
     new private void Awake()
     {
-        filePath = Application.persistentDataPath + "/" + ".savedata.json";
-        Debug.Log(Application.persistentDataPath);
         save = new SaveData();
         // this.Initialize();
         // this.Save();
@@ -70,16 +69,16 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
     public void Save()
     {
         string json = JsonUtility.ToJson(save);
-        StreamWriter streamWriter = new StreamWriter(filePath);
+        StreamWriter streamWriter = new StreamWriter(GameManager.Instance.filePath);
         streamWriter.Write(json);
         streamWriter.Close();
     }
 
     public void Load()
     {
-        if (File.Exists(filePath))
+        if (File.Exists(GameManager.Instance.filePath))
         {
-            StreamReader streamReader = new StreamReader(filePath);
+            StreamReader streamReader = new StreamReader(GameManager.Instance.filePath);
             string data = streamReader.ReadToEnd();
             streamReader.Close();
             save = JsonUtility.FromJson<SaveData>(data);

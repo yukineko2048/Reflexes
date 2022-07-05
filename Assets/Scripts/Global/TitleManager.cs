@@ -32,11 +32,13 @@ public class TitleManager : SingletonMonoBehaviour<TitleManager>
 
     public void ActiveTrueCustomPanel()
     {
+        GameManager.Instance.ActiveCustomPanel();
         this.SetActiveCustomPanel(true);
     }
 
     public void ActiveFalseCustomPanel()
     {
+        GameManager.Instance.UnActiveCustomPanel();
         this.SetActiveCustomPanel(false);
     }
 

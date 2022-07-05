@@ -10,6 +10,9 @@ namespace Const
 
         // ゲームバージョン
         public const string STRING_GAME_VERSION = "0.0.1";
+
+        // セーブデータファイル名
+        public const string SAVE_FILE_NAME = "savedata.json";
         //---------------------------------------------
         //// *** ゲーム設定 *** ////
         //---------------------------------------------

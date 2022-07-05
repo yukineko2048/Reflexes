@@ -8,6 +8,8 @@ TagManager:
   - PanelHeader
   - PanelBody
   - PanelFooter
+  - BackPanel
+  - TouchSound
   layers:
   - Default
   - TransparentFX
