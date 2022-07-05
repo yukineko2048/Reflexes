@@ -59,15 +59,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this._IGameTimer.Initialize(CO.TIME_LIMIT);
         this._isRunning = this._IGameTimer.IsRunning;
 
-        // 初期化処理
+        // 初期化処理(起動時1回しかしないもの)
         CustomManager.Instance.CustomButtonGenerate();
+
+        // 初期化処理
         this.GameInitialize();
 
         // 初期化(ゲーム開始時はタイトル画面)
         this.Title();
-
-        // SetObjectColor(Color.red);
-        // SetBackColor(Color.red);
     }
 
     // アプリ起動時

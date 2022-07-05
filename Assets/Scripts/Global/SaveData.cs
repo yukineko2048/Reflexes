@@ -8,6 +8,27 @@ public class SaveData
     public List<ObjectColor> objectColor = new List<ObjectColor>();
     public List<BackColor> backColor = new List<BackColor>();
     public List<Sound> sound = new List<Sound>();
+
+    public void SelectedClear_OC()
+    {
+        foreach(var obj in objectColor){
+            obj.selected = false;
+        }
+    }
+
+    public void SelectedClear_BC()
+    {
+        foreach(var obj in backColor){
+            obj.selected = false;
+        }
+    }
+
+    public void SelectedClear_S()
+    {
+        foreach(var obj in sound){
+            obj.selected = false;
+        }
+    }
 }
 
 [Serializable]
@@ -24,6 +45,11 @@ public class ObjectColor
         this.unlock = unlock;
         this.name = name;
         this.sellingPrice = sellingPrice;
+    }
+
+    public void SelectClear()
+    {
+
     }
 }
 

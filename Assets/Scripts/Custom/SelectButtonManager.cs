@@ -32,8 +32,9 @@ public class SelectButtonManager : MonoBehaviour
                 button.GetComponent<ISelectButton>().Selected(false);
             }
             var child = button;
+            var index = i;
             // ボタンを押したときの処理の追加
-            button.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(child.transform));
+            button.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(child.transform, index));
             // ボタンのnameを設定
             button.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name[i];
             // 売値を設定
@@ -43,12 +44,32 @@ public class SelectButtonManager : MonoBehaviour
 
     }
 
-    private void SelectedButton(Transform child)
+    private void SelectedButton(Transform child, int index)
     {
+        Debug.Log(index);
+        var save = SaveManager.Instance.save;
         // 初期化
         this.SelectButtonFrameInvisible(this._buttonsParent);
         // 選択フレームを出す
         child.gameObject.GetComponent<ISelectButton>().Selected(true);
+        // saveファイル更新
+        var content = child.gameObject.transform.parent.parent;
+        if (content.gameObject.CompareTag("TouchObject"))
+        {
+            save.SelectedClear_OC();
+            save.objectColor[index].selected = true;
+        }
+        else if (content.gameObject.CompareTag("BackPanel"))
+        {
+            save.SelectedClear_BC();
+            save.backColor[index].selected = true;
+        }
+        else if (content.gameObject.CompareTag("TouchSound"))
+        {
+            save.SelectedClear_S();
+            save.sound[index].selected = true;
+        }
+        SaveManager.Instance.Save();
     }
 
     private void SelectButtonFrameInvisible(Transform Content)
