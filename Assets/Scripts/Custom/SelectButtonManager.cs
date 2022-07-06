@@ -24,21 +24,24 @@ public class SelectButtonManager : MonoBehaviour
                 // ロックimageの表示
                 button.transform.Find("LockPanel").gameObject.SetActive(true);
             }
-            
+
             // 選択されているかどうかセーブデータから取得
             if (selected[i])
             {
                 // 選択フレームを出す
                 button.GetComponent<ISelectButton>().Selected(false);
             }
-            var child = button;
+            var btn = button;
             var index = i;
             // ボタンを押したときの処理の追加
-            button.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(child.transform, index));
-            // ボタンのnameを設定
+            button.GetComponent<Button>().onClick.AddListener(() => this.SelectedButton(btn.transform, index));
+            // ボタンに表示するテキストを設定
             button.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name[i];
             // 売値を設定
             this._buttonsParent.GetChild(i).Find("SellingPrice").GetComponent<TextMeshProUGUI>().text = sellingPrice[i].ToString();
+            // アンロックボタンを押したときの処理の追加
+            var unlockButton = button.transform.Find("LockPanel/UnlockButton").gameObject;
+            unlockButton.GetComponent<Button>().onClick.AddListener(() => this.SelectedUnlockButton(unlockButton.transform, index));
         }
         // 現在選択されているボタンにフレームを付ける
 
@@ -46,7 +49,6 @@ public class SelectButtonManager : MonoBehaviour
 
     private void SelectedButton(Transform child, int index)
     {
-        Debug.Log(index);
         var save = SaveManager.Instance.save;
         // 初期化
         this.SelectButtonFrameInvisible(this._buttonsParent);
@@ -70,6 +72,37 @@ public class SelectButtonManager : MonoBehaviour
             save.sound[index].selected = true;
         }
         SaveManager.Instance.Save();
+    }
+
+    private void SelectedUnlockButton(Transform child, int index)
+    {
+        var save = SaveManager.Instance.save;
+        // BuyWindowを表示
+        var buyWindow = this.gameObject.transform.parent.Find("BuyWindow");
+        buyWindow.Find("Panel/TypeText").gameObject.GetComponent<TextMeshProUGUI>().text = this.gameObject.name;
+        // saveファイル更新
+        var content = child.gameObject.transform.parent.parent.parent.parent;
+        string typeText = "";
+        int value = 0;
+        if (content.gameObject.CompareTag("TouchObject"))
+        {
+            typeText = save.objectColor[index].name;
+            value = save.objectColor[index].sellingPrice;
+        }
+        else if (content.gameObject.CompareTag("BackPanel"))
+        {
+            typeText = save.backColor[index].name;
+            value = save.backColor[index].sellingPrice;
+        }
+        else if (content.gameObject.CompareTag("TouchSound"))
+        {
+            typeText = save.sound[index].name;
+            value = save.sound[index].sellingPrice;
+        }
+        // BuyWindowに処理をうつすFind使いすぎ
+        buyWindow.GetComponent<IBuyWindow>().ShowBuyWindow(typeText, value, child, index);
+        // BuyWindowの中のHaveCoinsを更新する為
+        CoinManager.Instance.UpdateCoin();
     }
 
     private void SelectButtonFrameInvisible(Transform Content)

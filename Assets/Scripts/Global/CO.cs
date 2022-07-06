@@ -8,6 +8,12 @@ namespace Const
         // 固定フレームレート
         public const int TARGET_FRAME_RATE = 60;
 
+        // 解像度設定(横幅)
+        public const int RESOLUTION_WIDTH = 1080;
+
+        // 解像度設定(縦幅)
+        public const int RESOLUTION_HEIGHT = 1920;
+
         // ゲームバージョン
         public const string STRING_GAME_VERSION = "0.0.1";
 

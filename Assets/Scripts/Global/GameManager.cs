@@ -37,14 +37,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     new private void Awake()
     {
         filePath = Application.persistentDataPath + "/." + CO.SAVE_FILE_NAME;
+        // 解像度の設定
+        Screen.SetResolution(CO.RESOLUTION_WIDTH, CO.RESOLUTION_HEIGHT, false);
     }
 
     private void Start()
     {
         // 広告の起動
         GoogleMobileAdsDemoScript.Instance.AdStart();
-        // 解像度の設定
-        Screen.SetResolution(1080, 1920, false);
         // 動作フレームの固定
         Application.targetFrameRate = CO.TARGET_FRAME_RATE;
         // セーブデータのロード
