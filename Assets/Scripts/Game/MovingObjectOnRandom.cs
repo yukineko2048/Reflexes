@@ -14,7 +14,10 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
     private Vector2 _startPos { get; set; }
     // オブジェクト移動の終点
     private Vector2 _endPos { get; set; }
+    // オブジェクトが動く時間
     private int _movingTime = CO.MOVING_TIME;
+    // オブジェクトの移動中判定用
+    private bool _is_object_moving { get; set; }
     // オブジェクト情報
     private ITouchObject _ITouchObject;
     // カメラ情報
@@ -61,7 +64,8 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
     // 次に出現させるポジションを任意で作成する(pos.zは関係ないので今まで同じ値を用いる)
     public void SetPosition(Vector3 pos)
     {
-        this._tra_pos = new Vector3(pos.x,pos.y,this._tra_pos.z);
+        Debug.Log("shutyo");
+        StartCoroutine(WaitIsObjectMoving(pos));
     }
 
     // 次に出現させるポジションを作成する
@@ -74,10 +78,11 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
         StartCoroutine("MoveTouchObject");
         this._tra_pos = this._endPos;
     }
-    
+
     IEnumerator MoveTouchObject()
     {
-        var actionFlame = _movingTime;
+        this._is_object_moving = true;
+        var actionFlame = this._movingTime;
         Vector2 dis = new Vector2(this._endPos.x - this._startPos.x, this._endPos.y - this._startPos.y);
         // Debug.Log(transform.position.x + this._endPos.x);
         // Debug.Log(transform.position.y + this._endPos.y);
@@ -88,5 +93,20 @@ public class MovingObjectOnRandom : MonoBehaviour, IMovingObjectOnRandom
             transform.position = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
             yield return null;
         }
+        this._is_object_moving = false;
+    }
+
+    IEnumerator WaitIsObjectMoving(Vector3 pos)
+    {
+        if (this._is_object_moving)
+        {
+            var actionFlame = this._movingTime;
+            for (int i = actionFlame; i > 0; i--)
+            {
+                yield return null;
+            }
+        }
+        this.gameObject.transform.localPosition = pos;
+        this._tra_pos = pos;
     }
 }
