@@ -72,3 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/GUI Kit - Neon/
 Assets/GUI PRO Kit - Simple Casual/
+Assets/Plugins/UnityEditorMemo
+Assets/Plugins/UnityEditorMemo.meta
